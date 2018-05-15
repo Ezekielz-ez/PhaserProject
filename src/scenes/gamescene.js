@@ -38,7 +38,7 @@ export default class GameScene extends Phaser.Scene
     create()
     {
         this.background = this.add.sprite(600,600,"background");
-
+        this.speed =200;
         //set the sprite to the objects
         this.left = this.impact.add.sprite(150, 600,"left");
         this.right = this.impact.add.sprite(1050, 600,"right");
@@ -51,13 +51,10 @@ export default class GameScene extends Phaser.Scene
         this.right.setTypeA().setCheckAgainstB().setFixedCollision();
         this.up.setTypeA().setCheckAgainstB().setFixedCollision();
         this.down.setTypeA().setCheckAgainstB().setFixedCollision();
-        this.ball.setTypeB().setCheckAgainstA().setActiveCollision().setMaxVelocity(300);
+        this.ball.setTypeB().setCheckAgainstA().setActiveCollision().setMaxVelocity(100);
         
-        this.ball.setBounce(1.2).setVelocityX(200);
-        
-
+        this.ball.setBounce(1).setVelocityX(3000);
         this.point = this.add.sprite(600, 600, "point");
-    
 
         this.leftKey  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -77,11 +74,11 @@ export default class GameScene extends Phaser.Scene
         //for first player
         if (this.leftKey.isDown)
         {
-            this.up.setVelocityX(-200);
+            this.up.setVelocityX(-this.speed);
         }
         else if(this.rightKey.isDown)
         {
-            this.up.setVelocityX(200);
+            this.up.setVelocityX(this.speed);
         }
         else
         {
@@ -91,11 +88,11 @@ export default class GameScene extends Phaser.Scene
         //
         if (this.downKey.isDown)
         {
-            this.left.setVelocityY(200);
+            this.left.setVelocityY(this.speed);
         }
         else if (this.upKey.isDown)
         {
-            this.left.setVelocityY(-200);
+            this.left.setVelocityY(-this.speed);
         }
         else
         {
@@ -106,11 +103,11 @@ export default class GameScene extends Phaser.Scene
         //for second player
         if (this.leftKey2.isDown)
         {
-            this.down.setVelocityX(-200);
+            this.down.setVelocityX(-this.speed);
         }
         else if (this.rightKey2.isDown)
         {
-            this.down.setVelocityX(200);
+            this.down.setVelocityX(this.speed);
         }
         else
         {
@@ -119,16 +116,17 @@ export default class GameScene extends Phaser.Scene
         
         if (this.upKey2.isDown)
         {
-            this.right.setVelocityY(200);
+            this.right.setVelocityY(this.speed);
         }
         else if (this.downKey2.isDown)
         {
-            this.right.setVelocityY(-200);
+            this.right.setVelocityY(-this.speed);
         }
         else
         {
             this.right.setVelocityY(0);
         }
+
         
         /*
         this.physics.world.collide(this.ball, this.left);
